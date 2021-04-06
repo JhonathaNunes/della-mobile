@@ -9,4 +9,7 @@
     <string name="login_failed">Não foi possível realizar o login</string>
     <string name="incorrect_username_password">Usuário e/ou senha incorreto</string>
     <string name="ok">OK</string>
+    <string name="search">Buscar</string>
+    <string name="add">Adicionar</string>
+    <string name="logout">Logout</string>
 </resources>
