@@ -12,4 +12,7 @@
     <string name="search">Buscar</string>
     <string name="add">Adicionar</string>
     <string name="logout">Logout</string>
+    <string name="client">Cliente</string>
+    <string name="order">Pedido</string>
+    <string name="materials">Materiais</string>
 </resources>

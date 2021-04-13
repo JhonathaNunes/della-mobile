@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +35,10 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
+        btnClient.setOnClickListener { startActivity(getString(R.string.client)) }
+        btnOrders.setOnClickListener { startActivity(getString(R.string.order)) }
+        btnMaterial.setOnClickListener { startActivity(getString(R.string.materials)) }
+
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -41,17 +46,20 @@ class MainActivity : AppCompatActivity() {
 
         when (item.itemId) {
             R.id.actionAdd -> {
-                val intent = Intent(applicationContext, AddActivity::class.java)
-
-                intent.putExtra("action", "Add")
-
-                startActivity(intent)
-                Toast.makeText(applicationContext, "Add", Toast.LENGTH_LONG).show()
+                startActivity("Add")
             }
             R.id.actionLogout -> {
                 finish()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun startActivity(activity: String) {
+        val intent = Intent(applicationContext, AddActivity::class.java)
+
+        intent.putExtra("action", activity)
+
+        startActivity(intent)
     }
 }
