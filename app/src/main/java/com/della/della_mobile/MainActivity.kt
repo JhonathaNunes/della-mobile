@@ -1,9 +1,11 @@
 package com.della.della_mobile
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.SearchView
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
@@ -14,19 +16,39 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+        val searchItem: SearchView = menu?.findItem(R.id.actionSearch)?.actionView as SearchView
+
+        if (searchItem != null) {
+            searchItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    Toast.makeText(applicationContext, newText, Toast.LENGTH_SHORT).show()
+
+                    return false
+                }
+
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    Toast.makeText(applicationContext, query, Toast.LENGTH_SHORT).show()
+
+                    return false
+                }
+            })
+        }
+
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.action_search -> {
-                Toast.makeText(applicationContext, "Search", Toast.LENGTH_LONG).show()
-            }
-            R.id.action_add -> {
+            R.id.actionAdd -> {
+                val intent = Intent(applicationContext, AddActivity::class.java)
+
+                intent.putExtra("action", "Add")
+
+                startActivity(intent)
                 Toast.makeText(applicationContext, "Add", Toast.LENGTH_LONG).show()
             }
-            R.id.action_logout -> {
+            R.id.actionLogout -> {
                 finish()
             }
         }
