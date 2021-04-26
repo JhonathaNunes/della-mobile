@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">della-mobile</string>
+    <string name="app_name">Della Mobile</string>
+    <string name="welcome">Bem-vindo</string>
+    <string name="make_login">Faça seu login</string>
+    <string name="username">Usuário</string>
+    <string name="password">Senha</string>
+    <string name="login">Login</string>
+    <string name="logo">Logo</string>
+    <string name="login_failed">Não foi possível realizar o login</string>
+    <string name="incorrect_username_password">Usuário e/ou senha incorreto</string>
+    <string name="ok">OK</string>
+    <string name="search">Buscar</string>
+    <string name="add">Adicionar</string>
+    <string name="logout">Logout</string>
+    <string name="client">Cliente</string>
+    <string name="order">Pedido</string>
+    <string name="materials">Materiais</string>
 </resources>
