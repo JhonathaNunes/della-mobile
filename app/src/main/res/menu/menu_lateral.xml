@@ -3,15 +3,18 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_client"
-            android:title="@string/client" android:checked="true"
-            />
+            android:title="@string/client"/>
+
         <item
             android:id="@+id/nav_order"
-            android:title="@string/order"
-            />
+            android:title="@string/order" />
+
         <item
             android:id="@+id/nav_materials"
-            android:title="@string/materials"
-            />
+            android:title="@string/materials" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:title="@string/logout" />
     </group>
 </menu>

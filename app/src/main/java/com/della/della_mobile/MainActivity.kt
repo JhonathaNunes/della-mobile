@@ -11,12 +11,16 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        configuraMenuLateral()
+
+        setSupportActionBar(toolbar)
+
+        configureMenuLateral()
 
         btnClient.setOnClickListener { startActivity(getString(R.string.client)) }
         btnOrders.setOnClickListener { startActivity(getString(R.string.order)) }
@@ -27,21 +31,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         menuInflater.inflate(R.menu.main_menu, menu)
         val searchItem: SearchView = menu?.findItem(R.id.actionSearch)?.actionView as SearchView
 
-        if (searchItem != null) {
-            searchItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    Toast.makeText(applicationContext, newText, Toast.LENGTH_SHORT).show()
+        searchItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Toast.makeText(applicationContext, newText, Toast.LENGTH_SHORT).show()
 
-                    return false
-                }
+                return false
+            }
 
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    Toast.makeText(applicationContext, query, Toast.LENGTH_SHORT).show()
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Toast.makeText(applicationContext, query, Toast.LENGTH_SHORT).show()
 
-                    return false
-                }
-            })
-        }
+                return false
+            }
+        })
 
         return super.onCreateOptionsMenu(menu)
     }
@@ -59,32 +61,34 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return super.onOptionsItemSelected(item)
     }
 
-    private fun configuraMenuLateral() {
-        val toogle = ActionBarDrawerToggle(
-            this,
-            layoutMenuLateral,
-            R.string.drawer_open,
-            R.string.drawer_close
+    private fun configureMenuLateral() {
+        val toggle = ActionBarDrawerToggle(
+                this,
+                layoutMenuLateral,
+                toolbar,
+                R.string.drawer_open,
+                R.string.drawer_close
         )
 
-        layoutMenuLateral.addDrawerListener(toogle)
-        toogle.syncState()
+        layoutMenuLateral.addDrawerListener(toggle)
+        toggle.syncState()
 
         menu_lateral.setNavigationItemSelectedListener(this)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId){
-            R.id.nav_client ->{
-
-                Toast.makeText(this, "Clicou cliente", Toast.LENGTH_SHORT).show()
+            R.id.nav_client -> {
+                startActivity(getString(R.string.client))
             }
-            R.id.nav_order->{
-                Toast.makeText(this, "Clicou pedido", Toast.LENGTH_SHORT).show()
+            R.id.nav_order -> {
+                startActivity(getString(R.string.order))
             }
-            R.id.nav_materials->{
-                Toast.makeText(this, "Clicou materiais", Toast.LENGTH_SHORT).show()
+            R.id.nav_materials -> {
+                startActivity(getString(R.string.materials))
+            }
+            R.id.nav_logout -> {
+                finish()
             }
         }
 

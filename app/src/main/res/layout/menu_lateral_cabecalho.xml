@@ -3,7 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="160dp"
+    android:background="@drawable/bg"
     android:layout_gravity="bottom"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:padding="16dp">
 
     <ImageView
@@ -12,12 +14,6 @@
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_launcher"
         android:paddingTop="16dp"
-        android:contentDescription=""/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/user_name_string"
-        android:padding="16dp"/>
+        android:contentDescription="@string/user_photo"/>
 
 </LinearLayout>
