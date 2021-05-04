@@ -18,4 +18,5 @@
     <string name="drawer_open">Aberto</string>
     <string name="drawer_close">Fechado</string>
     <string name="user_name_string">Nome Usuario:</string>
+    <string name="user_photo">User photo</string>
 </resources>
