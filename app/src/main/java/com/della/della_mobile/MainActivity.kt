@@ -7,12 +7,20 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        configuraMenuLateral()
+
+        btnClient.setOnClickListener { startActivity(getString(R.string.client)) }
+        btnOrders.setOnClickListener { startActivity(getString(R.string.order)) }
+        btnMaterial.setOnClickListener { startActivity(getString(R.string.materials)) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -35,10 +43,6 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
-        btnClient.setOnClickListener { startActivity(getString(R.string.client)) }
-        btnOrders.setOnClickListener { startActivity(getString(R.string.order)) }
-        btnMaterial.setOnClickListener { startActivity(getString(R.string.materials)) }
-
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -53,6 +57,40 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun configuraMenuLateral() {
+        val toogle = ActionBarDrawerToggle(
+            this,
+            layoutMenuLateral,
+            R.string.drawer_open,
+            R.string.drawer_close
+        )
+
+        layoutMenuLateral.addDrawerListener(toogle)
+        toogle.syncState()
+
+        menu_lateral.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId){
+            R.id.nav_client ->{
+
+                Toast.makeText(this, "Clicou cliente", Toast.LENGTH_SHORT).show()
+            }
+            R.id.nav_order->{
+                Toast.makeText(this, "Clicou pedido", Toast.LENGTH_SHORT).show()
+            }
+            R.id.nav_materials->{
+                Toast.makeText(this, "Clicou materiais", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        layoutMenuLateral.closeDrawer(GravityCompat.START)
+
+        return true
     }
 
     private fun startActivity(activity: String) {
