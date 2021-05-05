@@ -31,12 +31,12 @@ class ClientsListActivity : AppCompatActivity() {
         taskClients()
     }
 
-    fun taskClients() {
+    private fun taskClients() {
         clients = ClientsService.getClients()
         recycler_clients.adapter = ClientAdapter(clients) { onClickClient(it) }
     }
 
-    fun onClickClient(client: Client) {
+    private fun onClickClient(client: Client) {
         Toast.makeText(this, client.toString(), Toast.LENGTH_SHORT).show()
     }
 
