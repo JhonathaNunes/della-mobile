@@ -22,9 +22,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         configureMenuLateral()
 
-        btnClient.setOnClickListener { startActivity(getString(R.string.client)) }
-        btnOrders.setOnClickListener { startActivity(getString(R.string.order)) }
-        btnMaterial.setOnClickListener { startActivity(getString(R.string.materials)) }
+        btn_client.setOnClickListener { startClientActivity() }
+        
+        btn_orders.setOnClickListener { startActivityWithName(getString(R.string.order)) }
+        btn_material.setOnClickListener { startActivityWithName(getString(R.string.materials)) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         when (item.itemId) {
             R.id.actionAdd -> {
-                startActivity("Add")
+                startActivityWithName("Add")
             }
             R.id.actionLogout -> {
                 finish()
@@ -79,13 +80,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.nav_client -> {
-                startActivity(getString(R.string.client))
+                startClientActivity()
             }
             R.id.nav_order -> {
-                startActivity(getString(R.string.order))
+                startActivityWithName(getString(R.string.order))
             }
             R.id.nav_materials -> {
-                startActivity(getString(R.string.materials))
+                startActivityWithName(getString(R.string.materials))
             }
             R.id.nav_logout -> {
                 finish()
@@ -96,8 +97,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         return true
     }
+    
+    private fun startClientActivity() {
+        val intent = Intent(applicationContext, ClientsListActivity::class.java)
 
-    private fun startActivity(activity: String) {
+        startActivity(intent)
+    }
+
+    private fun startActivityWithName(activity: String) {
         val intent = Intent(applicationContext, AddActivity::class.java)
 
         intent.putExtra("action", activity)

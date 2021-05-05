@@ -23,19 +23,19 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/btnClient"
+                android:id="@+id/btn_client"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/client"/>
 
             <Button
-                android:id="@+id/btnOrders"
+                android:id="@+id/btn_orders"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/order"/>
 
             <Button
-                android:id="@+id/btnMaterial"
+                android:id="@+id/btn_material"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/materials"/>

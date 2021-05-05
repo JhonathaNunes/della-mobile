@@ -11,4 +11,5 @@
     <color name="primary_lighter">#FF8989</color>
     <color name="secondary">#2AADDB</color>
     <color name="secondary_lighter">#7CBFD6</color>
+    <color name="light_grey">#BBBBBB</color>
 </resources>

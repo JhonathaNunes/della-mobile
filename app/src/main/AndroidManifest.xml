@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dellamobile">
-        <activity android:name=".AddActivity"/>
+        <activity android:name=".ClientsListActivity"/>
+        <activity android:name=".AddActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" android:theme="@style/Theme.Dellamobile.Toolbar">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.Dellamobile.Toolbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
