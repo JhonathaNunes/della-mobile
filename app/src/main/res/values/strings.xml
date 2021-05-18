@@ -15,4 +15,8 @@
     <string name="client">Cliente</string>
     <string name="order">Pedido</string>
     <string name="materials">Materiais</string>
+    <string name="drawer_open">Aberto</string>
+    <string name="drawer_close">Fechado</string>
+    <string name="user_name_string">Nome Usuario:</string>
+    <string name="user_photo">User photo</string>
 </resources>

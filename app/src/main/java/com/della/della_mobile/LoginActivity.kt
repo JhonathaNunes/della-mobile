@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -13,7 +12,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        btnLogin.setOnClickListener {
+        btn_login.setOnClickListener {
             login()
         }
 
@@ -27,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun login() {
+    private fun login() {
         val username = txtUsername.text.toString()
         val password = txtPassword.text.toString()
 
