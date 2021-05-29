@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import com.della.della_mobile.models.Client
+import com.della.della_mobile.services.ClientsService
 import kotlinx.android.synthetic.main.activity_add.*
 
 class AddActivity : AppCompatActivity() {
@@ -14,10 +17,10 @@ class AddActivity : AppCompatActivity() {
 
         val args = intent.extras
 
-        supportActionBar?.title = "Activity ${args?.getString("action")}"
+        supportActionBar?.title = "Novo cliente"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        txtActivity.text = "This is ${args?.getString("action")}"
+        btn_save.setOnClickListener { onClick() }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -26,5 +29,22 @@ class AddActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun onClick() {
+        val client = Client(
+            fullName = field_fullname.text.toString(),
+            email = field_email.text.toString(),
+            cpf = field_cpf.text.toString(),
+            cnpj = field_email.text.toString(),
+        )
+
+        Thread {
+            ClientsService.create(client)
+            runOnUiThread {
+                Toast.makeText(this, R.string.client_added, Toast.LENGTH_SHORT)
+                finish()
+            }
+        }.start()
     }
 }

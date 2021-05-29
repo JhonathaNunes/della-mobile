@@ -1,20 +1,37 @@
 package com.della.della_mobile.services
 
 import android.content.Context
+import android.util.Log
 import com.della.della_mobile.models.Client
+import com.della.della_mobile.utils.AndroidUtils
+import com.della.della_mobile.utils.HttpHelper
+import com.della.della_mobile.utils.JsonParser.parserJson
+import com.della.della_mobile.utils.Response
 
 object ClientsService {
-    fun getClients(): List<Client> {
-        val clients = mutableListOf<Client>()
-        for (i in 1..50) {
-            val client = Client(
-                fullName = "Client $i",
-                email = "client+$i@gmail.com"
-            )
+    val HOST = "http://jhonpython.pythonanywhere.com"
 
-            clients.add(client)
+    fun getClients(context: Context): List<Client> {
+        if (!AndroidUtils.isInternetAvailable(context)) {
+            return ArrayList<Client>()
         }
 
-        return clients
+        val url = "$HOST/clientes"
+        val json = HttpHelper.get(url)
+
+        Log.d("ERRRRA", json)
+
+        return parserJson(json)
+    }
+
+    fun create(client: Client): Response {
+        val json = HttpHelper.post("$HOST/clientes", client.toJson())
+        return parserJson(json)
+    }
+
+    fun delete(client: Client): Response {
+        val url = "$HOST/disciplinas/${client.id}"
+        val json = HttpHelper.delete(url)
+        return parserJson(json)
     }
 }

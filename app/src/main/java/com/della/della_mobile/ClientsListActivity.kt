@@ -32,8 +32,12 @@ class ClientsListActivity : AppCompatActivity() {
     }
 
     private fun taskClients() {
-        clients = ClientsService.getClients()
-        recycler_clients.adapter = ClientAdapter(clients) { onClickClient(it) }
+        Thread {
+            clients = ClientsService.getClients(this)
+            runOnUiThread {
+                recycler_clients.adapter = ClientAdapter(clients) { onClickClient(it) }
+            }
+        }.start()
     }
 
     private fun onClickClient(client: Client) {
