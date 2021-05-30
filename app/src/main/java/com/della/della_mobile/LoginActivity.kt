@@ -5,12 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AlertDialog
+import com.della.della_mobile.utils.Prefs
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        if (Prefs.getBoolean("Remember")) {
+            val username = Prefs.getString("Username")
+            val password = Prefs.getString("Password")
+            txtUsername.setText(username)
+            txtPassword.setText(password)
+            check_remember.isChecked = true
+        }
 
         btn_login.setOnClickListener {
             login()
@@ -32,6 +41,16 @@ class LoginActivity : AppCompatActivity() {
 
         if (username == "aluno" && password == "impacta") {
             val intent = Intent(this, MainActivity::class.java)
+
+            Prefs.setBoolean("Remember", check_remember.isChecked)
+
+            if (check_remember.isChecked) {
+                Prefs.setString("UserName", username)
+                Prefs.setString("Password", password)
+            } else {
+                Prefs.setString("UserName", "")
+                Prefs.setString("Password", "")
+            }
 
             startActivity(intent)
         } else {
