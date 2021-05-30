@@ -1,7 +1,9 @@
 package com.della.della_mobile
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -41,12 +43,29 @@ class ClientsListActivity : AppCompatActivity() {
     }
 
     private fun onClickClient(client: Client) {
-        Toast.makeText(this, client.toString(), Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, AddActivity::class.java)
+
+        intent.putExtra("CLIENT", client)
+
+        startActivity(intent)
+    }
+
+    private fun startAddClientActivity() {
+        val intent = Intent(this, AddActivity::class.java)
+
+        startActivity(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.list_activity_menu, menu)
+
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             android.R.id.home -> finish()
+            R.id.actionAdd -> startAddClientActivity()
         }
 
         return super.onOptionsItemSelected(item)

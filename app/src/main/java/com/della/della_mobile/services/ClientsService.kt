@@ -19,8 +19,6 @@ object ClientsService {
         val url = "$HOST/clientes"
         val json = HttpHelper.get(url)
 
-        Log.d("ERRRRA", json)
-
         return parserJson(json)
     }
 
@@ -30,7 +28,7 @@ object ClientsService {
     }
 
     fun delete(client: Client): Response {
-        val url = "$HOST/disciplinas/${client.id}"
+        val url = "$HOST/clientes/${client.id}"
         val json = HttpHelper.delete(url)
         return parserJson(json)
     }

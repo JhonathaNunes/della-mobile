@@ -6,11 +6,6 @@
         android:icon="@drawable/ic_search_dark"
         android:title="@string/search"
         app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="always" />
-
-    <item android:id="@+id/actionAdd"
-        android:icon="@drawable/ic_add"
-        android:title="@string/add"
         app:showAsAction="ifRoom" />
 
     <item android:id="@+id/actionLogout"

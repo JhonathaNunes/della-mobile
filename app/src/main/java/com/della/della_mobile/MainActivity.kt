@@ -55,9 +55,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.actionAdd -> {
-                startAddClientActivity()
-            }
             R.id.actionLogout -> {
                 finish()
             }
@@ -103,12 +100,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     
     private fun startClientActivity() {
         val intent = Intent(applicationContext, ClientsListActivity::class.java)
-
-        startActivity(intent)
-    }
-
-    private fun startAddClientActivity() {
-        val intent = Intent(applicationContext, AddActivity::class.java)
 
         startActivity(intent)
     }
