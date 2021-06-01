@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AlertDialog
+import com.della.della_mobile.services.ClientsService
 import com.della.della_mobile.utils.Prefs
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -35,6 +36,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        openClient()
+    }
+
     private fun login() {
         val username = txtUsername.text.toString()
         val password = txtPassword.text.toString()
@@ -45,10 +52,10 @@ class LoginActivity : AppCompatActivity() {
             Prefs.setBoolean("Remember", check_remember.isChecked)
 
             if (check_remember.isChecked) {
-                Prefs.setString("UserName", username)
+                Prefs.setString("Username", username)
                 Prefs.setString("Password", password)
             } else {
-                Prefs.setString("UserName", "")
+                Prefs.setString("Username", "")
                 Prefs.setString("Password", "")
             }
 
@@ -64,6 +71,21 @@ class LoginActivity : AppCompatActivity() {
             }
 
             alertDialog.show()
+        }
+    }
+
+    private fun openClient() {
+        if (intent.hasExtra("clientId")) {
+            Thread {
+                val clientId = intent.getStringExtra("clientId")?.toLong() ?: -1
+                val client = ClientsService.getClient(clientId)
+                runOnUiThread {
+                    intent.removeExtra("clientId")
+                    val clientIntent = Intent(this, AddActivity::class.java)
+                    clientIntent.putExtra("CLIENT", client)
+                    startActivity(clientIntent)
+                }
+            }.start()
         }
     }
 }

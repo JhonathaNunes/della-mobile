@@ -1,7 +1,5 @@
 package com.della.della_mobile.services
 
-import android.content.Context
-import android.util.Log
 import com.della.della_mobile.database.DatabaseManager
 import com.della.della_mobile.models.Client
 import com.della.della_mobile.utils.AndroidUtils
@@ -39,6 +37,19 @@ object ClientsService {
         }
 
         return clients
+    }
+
+    fun getClient(id: Long): Client? {
+        if (AndroidUtils.isInternetAvailable()) {
+            val url = "$HOST/clientes/$id"
+            val json = HttpHelper.get(url)
+
+            return parserJson<Client>(json)
+        }
+
+        val dao = DatabaseManager.getClientDAO()
+
+        return dao.getById(id)
     }
 
     fun create(client: Client): Response {

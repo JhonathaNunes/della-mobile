@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.della.della_mobile.adapters.ClientAdapter
 import com.della.della_mobile.models.Client
 import com.della.della_mobile.services.ClientsService
+import com.della.della_mobile.utils.NotificationUtil
 import kotlinx.android.synthetic.main.activity_clients_list.*
 
 class ClientsListActivity : AppCompatActivity() {
@@ -33,11 +34,24 @@ class ClientsListActivity : AppCompatActivity() {
         taskClients()
     }
 
+    private fun sendNotification(client: Client) {
+        val intent = Intent(this, AddActivity::class.java)
+
+        intent.putExtra("CLIENT", client)
+        NotificationUtil.create(
+            1,
+            intent,
+            getString(R.string.app_name),
+            "O cliente ${client.toString()} tem uma mensagem"
+        )
+    }
+
     private fun taskClients() {
         Thread {
-            clients = ClientsService.getClients(this)
+            clients = ClientsService.getClients()
             runOnUiThread {
                 recycler_clients.adapter = ClientAdapter(clients) { onClickClient(it) }
+                sendNotification(clients[0])
             }
         }.start()
     }
