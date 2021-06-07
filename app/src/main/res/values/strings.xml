@@ -19,4 +19,8 @@
     <string name="drawer_close">Fechado</string>
     <string name="user_name_string">Nome Usuario:</string>
     <string name="user_photo">User photo</string>
+    <string name="client_added">Cliente adicionado</string>
+    <string name="delete">Deletar</string>
+    <string name="client_deleted">Cliente %s deletado</string>
+    <string name="remember_login">Lembrar login</string>
 </resources>
