@@ -14,6 +14,10 @@
             android:title="@string/materials" />
 
         <item
+            android:id="@+id/nav_profile_picture"
+            android:title="@string/profile_picture" />
+
+        <item
             android:id="@+id/nav_logout"
             android:title="@string/logout" />
     </group>

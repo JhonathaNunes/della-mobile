@@ -1,6 +1,8 @@
 package com.della.della_mobile
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -9,11 +11,16 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import com.della.della_mobile.utils.Prefs
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.menu_lateral_cabecalho.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    val GALERY_REQUEST_CODE = 123
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -85,6 +92,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_order -> {
                 Toast.makeText(this, R.string.order, Toast.LENGTH_SHORT).show()
             }
+            R.id.nav_profile_picture -> {
+                startGaleryActivity()
+            }
             R.id.nav_materials -> {
                 Toast.makeText(this, R.string.materials, Toast.LENGTH_SHORT).show()
             }
@@ -96,6 +106,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         layoutMenuLateral.closeDrawer(GravityCompat.START)
 
         return true
+    }
+
+    private fun startGaleryActivity() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, GALERY_REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == GALERY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            val imageData: Uri? = data.data
+            imgUser.setImageURI(imageData)
+            if (Prefs.getBoolean("Remember"))
+                Prefs.setString("profilePhoto", imageData.toString())
+        }
     }
     
     private fun startClientActivity() {

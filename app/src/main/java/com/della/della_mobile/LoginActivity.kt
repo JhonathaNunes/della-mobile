@@ -57,6 +57,7 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 Prefs.setString("Username", "")
                 Prefs.setString("Password", "")
+                Prefs.setString("profilePhoto", "")
             }
 
             startActivity(intent)
